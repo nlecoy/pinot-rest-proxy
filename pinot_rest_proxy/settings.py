@@ -36,4 +36,4 @@ PINOT_CONTROLLER_URL = str_env("PINOT_CONTROLLER_URL")
 # Interval in seconds to refresh tenants and broker list
 # This interval should be big enough to not put to much pressure on Pinot Controller
 # but low enough to refresh proxy quickly when tenant is created / updated / deleted.
-ROUTING_REFRESH_INTERVAL = int_env("ROUTING_REFRESH_INTERVAL", 30)
+ROUTING_REFRESH_INTERVAL = int_env("ROUTING_REFRESH_INTERVAL", 120)

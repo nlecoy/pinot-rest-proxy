@@ -1,5 +1,3 @@
-import os
-
 from sanic import Sanic
 
 from pinot_rest_proxy import settings, views
