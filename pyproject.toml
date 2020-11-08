@@ -12,7 +12,6 @@ keywords = ["pinot", "rest", "proxy", "tenant"]
 [tool.poetry.dependencies]
 python = "^3.8"
 aiohttp = "^3.7.2"
-pydantic = "^1.7.2"
 sanic = "^20.9.1"
 
 [tool.poetry.dev-dependencies]
@@ -21,7 +20,6 @@ flake8 = "^3.8.4"
 isort = "^5.6.4"
 pytest = "^6.1.2"
 pytest-cov = "^2.10.1"
-sphinx = "^3.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
