@@ -1,5 +1,8 @@
+from http import HTTPStatus
+
 from aiohttp import ClientSession
 from aiohttp.client_exceptions import ClientResponseError
+from sanic.log import logger
 
 
 BROKER_HOST_PREFIX = "Broker_"
@@ -12,7 +15,7 @@ class PinotClient(object):
     async def _dispatch(self, method: str, url: str, headers: dict = None, json: dict = None):
         try:
             async with self.http.request(method, url, headers=headers, json=json) as rv:
-                return await rv.json()
+                return await rv.json(), rv.status
         except ClientResponseError as exc:
             raise exc
 
@@ -22,7 +25,16 @@ class PinotClient(object):
     async def get_tenant_list(self, controller_url: str):
         url = self._normalize_url(controller_url, "/v2/brokers/tenants")
         tenants = {}
-        data = await self._dispatch("GET", url)
+        data, status = await self._dispatch("GET", url)
+        if status != HTTPStatus.OK:
+            logger.warning(
+                "Failed to fetch tenant addresses",
+                extra={
+                    "status_code": status,
+                    "response": data,
+                },
+            )
+
         for name, brokers in data.items():
             tenants[name] = [
                 "http://{0}:{1}".format(

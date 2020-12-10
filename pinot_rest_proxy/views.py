@@ -39,7 +39,8 @@ async def execute_pql(request):
 
     brokers = request.app.tenants.get(tenant)
     try:
-        return await request.app.pinot_client.execute_pql_query(next(brokers), {"pql": pql})
+        data, status = await request.app.pinot_client.execute_pql_query(next(brokers), {"pql": pql})
+        return json(data, status=status)
     except ClientResponseError as exc:
         return json({"msg": exc.message}, status=exc.status)
 
@@ -56,6 +57,7 @@ async def execute_sql(request):
 
     brokers = request.app.tenants.get(tenant)
     try:
-        return await request.app.pinot_client.execute_sql_query(next(brokers), {"sql": sql})
+        data, status = await request.app.pinot_client.execute_sql_query(next(brokers), {"sql": sql})
+        return json(data, status=status)
     except ClientResponseError as exc:
         return json({"msg": exc.message}, status=exc.status)
