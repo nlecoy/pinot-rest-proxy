@@ -25,7 +25,9 @@ class PinotClient(object):
         data = await self._dispatch("GET", url)
         for name, brokers in data.items():
             tenants[name] = [
-                "{0}:{1}".format(broker["host"].replace(BROKER_HOST_PREFIX, ""), broker["port"])
+                "http://{0}:{1}".format(
+                    broker["host"].replace(BROKER_HOST_PREFIX, ""), broker["port"]
+                )
                 for broker in brokers
             ]
         return tenants
