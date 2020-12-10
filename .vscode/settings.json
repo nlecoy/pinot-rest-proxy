@@ -3,41 +3,25 @@
   "editor.insertSpaces": true,
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "all",
-  "editor.rulers": [
-    100
-  ],
-  "editor.tabSize": 4,
-  "files.trimTrailingWhitespace": false,
-  "files.trimFinalNewlines": false,
-  "files.insertFinalNewline": true,
   "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "${workspaceRoot}/.venv/bin/black",
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Path": "${workspaceRoot}/.venv/bin/flake8",
-  "python.linting.pycodestylePath": "${workspaceFolder}/.venv/bin/pep8",
-  "python.linting.pylintEnabled": false,
-  "python.testing.nosetestsEnabled": false,
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyPath": "${workspaceRoot}/.venv/bin/mypy",
   "python.testing.pytestEnabled": true,
   "python.testing.pytestPath": "${workspaceFolder}/.venv/bin/pytest",
-  "python.testing.unittestEnabled": false,
-  "search.followSymlinks": false,
-  "files.exclude": {
-    "**/.hg": true,
-    "**/.git": true,
-    "**/.pytest_cache": true,
-    "**/.venv": true,
-    "**/.DS_Store": true,
-    "**/*.egg-info": true,
-    "**/*.pyc": true,
-    "**/.coverage": true,
-    "**/CVS": true,
-    "**/__pycache__": true
-  },
+  // Enable VSCode to use isort on Python imports
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     }
+  },
+  // Exclude folders
+  "files.exclude": {
+    "**/.mypy_cache": true,
+    "**/.pytest_cache": true,
   }
 }
